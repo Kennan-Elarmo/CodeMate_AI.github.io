@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CodeMate AI | Programming Tutor</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg bg-white shadow-sm sticky-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="#home">
+      <i class="bi bi-mortarboard-fill"></i> CodeMate <span class="brand-ai">AI</span>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+      data-bs-target="#mainNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+        <li class="nav-item"><a class="nav-link" href="#courses">Courses</a></li>
+        <li class="nav-item"><a class="nav-link" href="#dashboard">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="#ai-tutor">AI Tutor</a></li>
+        <li class="nav-item"><a class="nav-link" href="#practice">Practice</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        <li class="nav-item"><a class="btn btn-brand btn-sm" href="#courses">Start Learning</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="home">
+  <div class="container">
+    <div class="row align-items-center min-vh-hero">
+      <div class="col-lg-7 text-center text-lg-start">
+        <span class="eyebrow">YOUR PERSONAL PROGRAMMING COMPANION</span>
+        <h1 class="display-4 fw-bold mt-3">
+          Learn to Code.<br>
+          <span class="gradient-text">Build Your Future.</span>
+        </h1>
+        <p class="lead my-4">
+          Learn programming step by step with beginner-friendly lessons,
+          coding challenges, progress tracking, and your CodeMate AI tutor.
+        </p>
+        <a href="#courses" class="btn btn-brand btn-lg me-2">Explore Lessons</a>
+        <a href="#ai-tutor" class="btn btn-outline-light btn-lg">Ask AI Tutor</a>
+      </div>
+
+      <div class="col-lg-5 d-none d-lg-block">
+        <div class="code-window">
+          <div class="window-dots">● ● ● <span>hello_world.py</span></div>
+          <pre><span class="code-purple">def</span> start_learning():
+    message = <span class="code-green">"Hello, Future Developer!"</span>
+    print(message)
+
+start_learning()</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- FEATURES -->
+<section id="features" class="py-5">
+  <div class="container py-4">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">Everything You Need to Start Coding</h2>
+      <p class="text-muted">Learn, practice, and improve your programming skills.</p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-3">
+        <div class="card feature-card text-center p-4 h-100">
+          <i class="bi bi-journal-code feature-icon"></i>
+          <h5>Guided Lessons</h5>
+          <p>Learn programming step by step.</p>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="card feature-card text-center p-4 h-100">
+          <i class="bi bi-robot feature-icon"></i>
+          <h5>AI Tutor</h5>
+          <p>Ask questions and receive explanations.</p>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="card feature-card text-center p-4 h-100">
+          <i class="bi bi-terminal feature-icon"></i>
+          <h5>Coding Practice</h5>
+          <p>Test your knowledge through challenges.</p>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="card feature-card text-center p-4 h-100">
+          <i class="bi bi-graph-up-arrow feature-icon"></i>
+          <h5>Track Progress</h5>
+          <p>Monitor your learning achievements.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="py-5 bg-white">
+  <div class="container py-4">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <div class="learning-art">
+          <i class="bi bi-code-slash"></i>
+          <h3>Learn by Doing</h3>
+          <p>One line at a time.</p>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <h2 class="fw-bold">Your Learning Journey Starts Here</h2>
+        <p class="text-muted">
+          EduBoost combines programming lessons, an AI tutor, coding practice,
+          and student progress tracking in one learning platform.
+        </p>
+        <ul class="list-unstyled">
+          <li><i class="bi bi-check-circle-fill text-success"></i> Beginner-friendly lessons</li>
+          <li><i class="bi bi-check-circle-fill text-success"></i> Multiple programming languages</li>
+          <li><i class="bi bi-check-circle-fill text-success"></i> Progress tracking and XP points</li>
+        </ul>
+        <a href="#dashboard" class="btn btn-brand">View Dashboard</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COURSES -->
+<section id="courses" class="py-5">
+  <div class="container py-4">
+    <div class="text-center mb-4">
+      <h2 class="fw-bold">Popular Programming Lessons</h2>
+      <p class="text-muted">Choose your language and learning level.</p>
+    </div>
+
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-4">
+        <label class="form-label">Programming Language</label>
+        <select id="language" class="form-select">
+          <option>Python</option>
+          <option>Java</option>
+          <option>C++</option>
+          <option>JavaScript</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">Learning Level</label>
+        <select id="level" class="form-select">
+          <option>Beginner</option>
+          <option>Intermediate</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row g-4" id="lessonCards">
+
+      <div class="col-md-6 col-lg-4">
+        <div class="card course-card h-100">
+          <div class="course-icon">💻</div>
+          <div class="card-body">
+            <span class="badge bg-brand">Lesson 01</span>
+            <h5>Introduction to Programming</h5>
+            <p>Understand basic programming concepts.</p>
+            <button class="btn btn-outline-primary btn-sm open-lesson" data-lesson="0">Start Lesson</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="card course-card h-100">
+          <div class="course-icon">📦</div>
+          <div class="card-body">
+            <span class="badge bg-brand">Lesson 02</span>
+            <h5>Variables and Data Types</h5>
+            <p>Learn how to store information.</p>
+            <button class="btn btn-outline-primary btn-sm open-lesson" data-lesson="1">Start Lesson</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="card course-card h-100">
+          <div class="course-icon">🔀</div>
+          <div class="card-body">
+            <span class="badge bg-brand">Lesson 03</span>
+            <h5>Conditional Statements</h5>
+            <p>Learn how programs make decisions.</p>
+            <button class="btn btn-outline-primary btn-sm open-lesson" data-lesson="2">Start Lesson</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="card course-card h-100">
+          <div class="course-icon">🔁</div>
+          <div class="card-body">
+            <span class="badge bg-brand">Lesson 04</span>
+            <h5>Loops</h5>
+            <p>Learn how to repeat instructions.</p>
+            <button class="btn btn-outline-primary btn-sm open-lesson" data-lesson="3">Start Lesson</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="card course-card h-100">
+          <div class="course-icon">⚙️</div>
+          <div class="card-body">
+            <span class="badge bg-brand">Lesson 05</span>
+            <h5>Functions</h5>
+            <p>Create reusable blocks of code.</p>
+            <button class="btn btn-outline-primary btn-sm open-lesson" data-lesson="4">Start Lesson</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div id="lessonViewer" class="lesson-viewer mt-4 d-none">
+      <button id="closeLesson" class="btn btn-sm btn-outline-secondary float-end">Close</button>
+      <h3 id="lessonTitle"></h3>
+      <p id="lessonDescription"></p>
+      <pre id="lessonExample" class="lesson-example"></pre>
+      <button id="completeLessonBtn" class="btn btn-brand">Complete Lesson ✓</button>
+      <span id="lessonStatus" class="text-success ms-2"></span>
+    </div>
+  </div>
+</section>
+
+<!-- DASHBOARD -->
+<section id="dashboard" class="py-5 bg-white">
+  <div class="container py-4">
+    <h2 class="fw-bold mb-4">My Learning Dashboard 📊</h2>
+
+    <div class="row g-3">
+      <div class="col-6 col-lg-3">
+        <div class="stat-card">
+          <i class="bi bi-graph-up"></i>
+          <p>Learning Progress</p>
+          <h3 id="dashboardProgress">0%</h3>
+        </div>
+      </div>
+
+      <div class="col-6 col-lg-3">
+        <div class="stat-card">
+          <i class="bi bi-book"></i>
+          <p>Lessons Completed</p>
+          <h3 id="completedLessons">0 / 5</h3>
+        </div>
+      </div>
+
+      <div class="col-6 col-lg-3">
+        <div class="stat-card">
+          <i class="bi bi-fire"></i>
+          <p>Learning Streak</p>
+          <h3 id="learningStreak">0 Days</h3>
+        </div>
+      </div>
+
+      <div class="col-6 col-lg-3">
+        <div class="stat-card">
+          <i class="bi bi-trophy"></i>
+          <p>Total Points</p>
+          <h3 id="totalXP">0 XP</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-white mt-4">
+      <h5>Overall Course Completion</h5>
+      <h3 id="progressPercentage">0%</h3>
+      <div class="progress">
+        <div id="progressFill" class="progress-bar" style="width:0%"></div>
+      </div>
+      <p id="progressText" class="text-muted mt-2">0 of 5 lessons completed</p>
+    </div>
+
+    <div class="panel-white mt-3">
+      <h5>Learning Modules</h5>
+      <div id="progressLessons"></div>
+    </div>
+  </div>
+</section>
+
+<!-- AI TUTOR -->
+<section id="ai-tutor" class="py-5">
+  <div class="container py-4">
+    <div class="text-center mb-4">
+      <h2 class="fw-bold">CodeMate AI Programming Tutor 🤖</h2>
+      <p class="text-muted">Ask questions about programming.</p>
+    </div>
+
+    <div class="chat-container mx-auto">
+      <div class="chat-header">
+        <i class="bi bi-robot"></i>
+        <div>
+          <h5>CodeMate AI Assistant</h5>
+          <small>● Ready to help</small>
+        </div>
+      </div>
+
+      <div class="chat-messages" id="chatMessages">
+        <div class="message bot-message">
+          Hello, student! I am CodeMate AI.
+          What programming topic would you like to learn?
+        </div>
+      </div>
+
+      <div class="suggestions">
+        <button class="suggestion-btn" data-question="What is programming?">What is programming?</button>
+        <button class="suggestion-btn" data-question="What are variables?">What are variables?</button>
+        <button class="suggestion-btn" data-question="Explain loops.">Explain loops</button>
+      </div>
+
+      <form id="chatForm" class="chat-input">
+        <input type="text" id="userQuestion" class="form-control"
+          placeholder="Ask your programming question..." required>
+        <button class="btn btn-brand" type="submit">Send ➤</button>
+      </form>
+
+      <p class="chat-note">Demo assistant using prepared explanations.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CODING PRACTICE -->
+<section id="practice" class="py-5 bg-white">
+  <div class="container py-4">
+    <div class="text-center mb-4">
+      <h2 class="fw-bold">Coding Practice Lab ⌨</h2>
+      <p class="text-muted">Test your programming knowledge.</p>
+    </div>
+
+    <div class="practice-card mx-auto">
+      <span class="badge bg-brand">Challenge 01 - Beginner</span>
+      <h3 class="mt-3">Hello, World!</h3>
+      <p>Write a Python program that displays this message:</p>
+
+      <div class="expected-output">Hello, World!</div>
+
+      <label for="codeEditor" class="form-label mt-3">Write your code:</label>
+      <textarea id="codeEditor" class="form-control code-editor" rows="5"
+        placeholder='print("Hello, World!")'></textarea>
+
+      <div class="mt-3 d-flex gap-2 flex-wrap">
+        <button id="checkCodeBtn" class="btn btn-brand">Check My Code ✓</button>
+        <button id="hintBtn" class="btn btn-outline-secondary">💡 Show Hint</button>
+        <button id="resetCodeBtn" class="btn btn-light">Reset</button>
+      </div>
+
+      <div id="hint" class="feedback-box d-none mt-3"></div>
+      <div id="codeResult" class="feedback-box d-none mt-2"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="py-5">
+  <div class="container py-4">
+    <div class="col-lg-6 mx-auto">
+      <h2 class="fw-bold text-center mb-4">Contact Us</h2>
+
+      <form id="contactForm" class="contact-card">
+        <label class="form-label" for="cname">Name</label>
+        <input type="text" id="cname" class="form-control mb-3" required>
+
+        <label class="form-label" for="cemail">Email</label>
+        <input type="email" id="cemail" class="form-control mb-3" required>
+
+        <label class="form-label" for="cmsg">Message</label>
+        <textarea id="cmsg" class="form-control mb-3" rows="4" required></textarea>
+
+        <button type="submit" class="btn btn-brand w-100">Send Message</button>
+        <p id="contactStatus" class="text-success mt-3"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-dark text-light py-4">
+  <div class="container d-flex justify-content-between flex-wrap gap-2">
+    <span>© 2026 CodeMate AI. For learning purposes.</span>
+    <span>Learn • Practice • Grow</span>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/script.js"></script>
+</body>
+</html>
