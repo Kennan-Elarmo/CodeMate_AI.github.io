@@ -1,543 +1,649 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap');
-
-:root {
-    --brand: #635bdb;
-    --brand-dark: #4942b5;
-    --ink: #20233a;
-    --muted: #6e7285;
-    --soft: #f5f6ff;
-}
-
-* {
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 80px;
-}
-
-body {
-    font-family: 'DM Sans', sans-serif;
-    color: var(--ink);
-    background: #f8f9fd;
-}
-
-h1, h2, h3, h4, h5 {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-}
-
-/* NAVBAR */
-
-.navbar {
-    min-height: 72px;
-}
-
-.navbar-brand {
-    font-size: 1.35rem;
-    color: var(--ink);
-}
-
-.navbar-brand i {
-    color: var(--brand);
-}
-
-.brand-ai {
-    font-size: 12px;
-    background: #eeedff;
-    color: var(--brand);
-    padding: 4px 7px;
-    border-radius: 7px;
-}
-
-.nav-link {
-    font-weight: 600;
-    color: #5e6274;
-}
-
-.nav-link:hover,
-.nav-link.active {
-    color: var(--brand) !important;
-}
-
-/* BUTTONS */
-
-.btn-brand {
-    background: var(--brand);
-    border: 1px solid var(--brand);
-    color: white;
-    font-weight: 700;
-    border-radius: 10px;
-    padding: 10px 18px;
-}
-
-.btn-brand:hover {
-    background: var(--brand-dark);
-    border-color: var(--brand-dark);
-    color: white;
-}
-
-/* HERO */
-
-.hero {
-    background:
-        radial-gradient(circle at 80% 20%, rgba(151,145,255,.38), transparent 28%),
-        linear-gradient(120deg, #25254d, #4942a7 58%, #7169e8);
-    color: white;
-    overflow: hidden;
-}
-
-.min-vh-hero {
-    min-height: 590px;
-    padding-top: 60px;
-    padding-bottom: 60px;
-}
-
-.hero h1 {
-    letter-spacing: -2px;
-    line-height: 1.12;
-}
-
-.hero .lead {
-    color: #e5e4ff;
-}
-
-.gradient-text {
-    background: linear-gradient(90deg, white, #c9c5ff);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-}
-
-.code-window {
-    background: #17182c;
-    border-radius: 18px;
-    padding: 25px;
-    box-shadow: 0 25px 65px #17163d66;
-    transform: rotate(2deg);
-}
-
-.window-dots {
-    padding-bottom: 20px;
-    border-bottom: 1px solid #ffffff22;
-    color: #ff7b80;
-    margin-bottom: 20px;
-}
-
-.window-dots span {
-    color: #aaaec8;
-    margin-left: 15px;
-}
-
-.code-window pre {
-    color: #e8e8ff;
-    line-height: 2;
-    white-space: pre-wrap;
-    font-size: 14px;
-}
-
-.code-purple {
-    color: #c6a6ff;
-}
-
-.code-green {
-    color: #8ce4bd;
-}
-
-/* FEATURES */
-
-section {
-    scroll-margin-top: 75px;
-}
-
-.feature-card {
-    border: none;
-    border-radius: 16px;
-    box-shadow: 0 8px 25px #29295c0c;
-    transition: .3s;
-}
-
-.feature-card:hover {
-    transform: translateY(-7px);
-    box-shadow: 0 18px 35px #29295c18;
-}
-
-.feature-icon {
-    font-size: 35px;
-    color: var(--brand);
-    background: #eeedff;
-    padding: 15px;
-    border-radius: 15px;
-    margin-bottom: 15px;
-}
-
-/* ABOUT */
-
-.learning-art {
-    min-height: 320px;
-    border-radius: 25px;
-    background: linear-gradient(140deg, #e8e7ff, #d9f4ed);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: var(--brand);
-    text-align: center;
-}
-
-.learning-art i {
-    font-size: 90px;
-}
-
-.learning-art h3 {
-    color: var(--ink);
-}
-
-/* COURSES */
-
-.course-card {
-    border: none;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 8px 25px #29295c0c;
-    transition: .3s;
-}
-
-.course-card:hover {
-    transform: translateY(-6px);
-}
-
-.course-icon {
-    height: 135px;
-    display: grid;
-    place-items: center;
-    font-size: 55px;
-    background: linear-gradient(135deg, #8074e8, #b49df7);
-    color: white;
-}
-
-.bg-brand {
-    background: var(--brand) !important;
-}
-
-.lesson-viewer,
-.panel-white,
-.practice-card,
-.contact-card {
-    background: white;
-    border: 1px solid #e9eaf3;
-    border-radius: 18px;
-    padding: 26px;
-    box-shadow: 0 8px 28px #29295c08;
-}
-
-.lesson-example {
-    background: #20233a;
-    color: #9be8c4;
-    border-radius: 10px;
-    padding: 18px;
-    white-space: pre-wrap;
-}
-
-/* DASHBOARD */
-
-.stat-card {
-    height: 100%;
-    background: white;
-    border: 1px solid #e9eaf3;
-    border-radius: 16px;
-    padding: 20px;
-    box-shadow: 0 8px 28px #29295c08;
-}
-
-.stat-card i {
-    font-size: 25px;
-    color: var(--brand);
-    background: #eeedff;
-    padding: 9px;
-    border-radius: 10px;
-}
-
-.stat-card p {
-    color: var(--muted);
-    font-size: 14px;
-    margin-top: 15px;
-}
-
-.stat-card h3 {
-    font-weight: 800;
-}
-
-.progress {
-    height: 12px;
-    border-radius: 20px;
-    background: #eeeff7;
-}
-
-.progress-bar {
-    background: linear-gradient(90deg, var(--brand), #9c83f5);
-    border-radius: 20px;
-}
-
-.module-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 13px 0;
-    border-bottom: 1px solid #e9eaf3;
-}
-
-/* Floating chat button */
-.chat-fab {
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  width: 60px;
-  height: 60px;
-  border: none;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #6c5ce7, #4f46e5);
-  color: #fff;
-  font-size: 1.6rem;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, .25);
-  z-index: 1060;
-  cursor: pointer;
-  transition: transform .2s;
-}
-.chat-fab:hover { transform: scale(1.08); }
-
-//* ===== Floating chat button ===== */
-.chat-fab {
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  width: 60px;
-  height: 60px;
-  border: none;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #6c5ce7, #4f46e5);
-  color: #fff;
-  font-size: 1.6rem;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, .25);
-  z-index: 1060;
-  cursor: pointer;
-}
-
-/* ===== Chat window ===== */
-#chatWidget {
-  position: fixed;
-  right: 20px;
-  bottom: 92px;
-  width: 360px;
-  max-width: calc(100vw - 32px);
-  height: 520px;
-  max-height: calc(100vh - 120px);
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, .3);
-  z-index: 1060;
-}
-
-#chatWidget .chat-header {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px 48px 14px 16px;
-  background: linear-gradient(135deg, #6c5ce7, #4f46e5);
-  color: #fff;
-  flex-shrink: 0;
-}
-#chatWidget .chat-header > i { font-size: 1.8rem; }
-#chatWidget .chat-header h5 { margin: 0; font-size: 1rem; font-weight: 700; }
-#chatWidget .chat-header small { opacity: .85; }
-#chatWidget .chat-close {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 1.1rem;
-  cursor: pointer;
-}
-
-#chatWidget .chat-messages {
-  flex: 1;
-  overflow-y: auto;
-  padding: 14px;
-  background: #f5f6fb;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-#chatWidget .message {
-  max-width: 85%;
-  padding: 10px 14px;
-  border-radius: 14px;
-  font-size: .92rem;
-  line-height: 1.45;
-  white-space: pre-wrap;
-}
-#chatWidget .bot-message {
-  align-self: flex-start;
-  background: #fff;
-  color: #222;
-  border: 1px solid #e4e6f0;
-  border-bottom-left-radius: 4px;
-}
-#chatWidget .user-message {
-  align-self: flex-end;
-  background: #4f46e5;
-  color: #fff;
-  border-bottom-right-radius: 4px;
-}
-
-#chatWidget .suggestions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  padding: 8px 12px;
-  background: #fff;
-  border-top: 1px solid #eee;
-  flex-shrink: 0;
-}
-#chatWidget .suggestion-btn {
-  border: 1px solid #c7c9f5;
-  background: #eef0ff;
-  color: #4f46e5;
-  border-radius: 20px;
-  padding: 4px 12px;
-  font-size: .8rem;
-  cursor: pointer;
-}
-
-#chatWidget .chat-input {
-  display: flex;
-  gap: 8px;
-  margin: 0;
-  padding: 10px 12px;
-  background: #fff;
-  flex-shrink: 0;
-}
-#chatWidget .chat-input .form-control { flex: 1; min-width: 0; }
-#chatWidget .chat-input .btn { white-space: nowrap; }
-
-#chatWidget .chat-note {
-  margin: 0;
-  padding: 0 12px 8px;
-  font-size: .72rem;
-  color: #888;
-  text-align: center;
-  background: #fff;
-  flex-shrink: 0;
-}
-
-/* CODING PRACTICE */
-
-.practice-card {
-    max-width: 800px;
-}
-
-.expected-output {
-    background: #20233a;
-    color: #9be8c4;
-    padding: 15px;
-    border-radius: 10px;
-    font-family: monospace;
-    font-weight: bold;
-}
-
-.code-editor {
-    font-family: Consolas, monospace;
-    background: #20233a;
-    color: #d9e4ff;
-    border: none;
-    line-height: 1.6;
-}
-
-.code-editor:focus {
-    background: #20233a;
-    color: white;
-}
-
-.feedback-box {
-    padding: 13px;
-    border-radius: 10px;
-    background: #f1f0ff;
-    color: #393477;
-}
-
-.feedback-box.success {
-    background: #e7f8f0;
-    color: #176b4b;
-}
-
-.feedback-box.error {
-    background: #fff0ef;
-    color: #a33d35;
-}
-
-/* CONTACT */
-
-.contact-card {
-    padding: 28px;
-}
-
-.form-control,
-.form-select {
-    border-color: #e1e3ee;
-    border-radius: 10px;
-    padding: 11px 13px;
-}
-
-.form-control:focus,
-.form-select:focus {
-    border-color: #a49df4;
-    box-shadow: 0 0 0 .2rem #635bdb18;
-}
-
-/* FOOTER */
-
-footer a {
-    text-decoration: none;
-    color: white;
-}
-
-footer a:hover {
-    color: #c9c5ff;
-}
-
-/* RESPONSIVE */
-
-@media (max-width: 767px) {
-    .min-vh-hero {
-        min-height: auto;
-        padding-top: 75px;
-        padding-bottom: 75px;
+document.addEventListener("DOMContentLoaded", function () {
+
+    // =================================
+    // LESSON DATA
+    // =================================
+
+    const lessons = [
+        {
+            title: "Introduction to Programming",
+            description: "Programming is the process of writing instructions that tell a computer what to do. Programmers use languages such as Python, Java, C++, and JavaScript to create programs.",
+            example: 'print("Hello, World!")'
+        },
+        {
+            title: "Variables and Data Types",
+            description: "Variables are used to store information. Common data types include strings, integers, floats, and booleans.",
+            example: 'name = "Alex"\nage = 16\nheight = 1.65\nis_student = True'
+        },
+        {
+            title: "Conditional Statements",
+            description: "Conditional statements allow programs to make decisions based on whether a condition is true or false.",
+            example: 'score = 85\n\nif score >= 75:\n    print("Passed")\nelse:\n    print("Try again")'
+        },
+        {
+            title: "Loops",
+            description: "Loops allow programmers to repeat instructions. Python has for loops and while loops.",
+            example: 'for number in range(1, 4):\n    print(number)'
+        },
+        {
+            title: "Functions",
+            description: "Functions are reusable blocks of code that perform specific tasks. They help organize programs.",
+            example: 'def greet(name):\n    print("Hello, " + name)\n\ngreet("Alex")'
+        }
+    ];
+
+
+    // =================================
+    // AI TUTOR ANSWERS
+    // =================================
+
+    const tutorAnswers = [
+        {
+            keywords: ["variable", "data type", "datatype"],
+            answer: "A variable is a named container that stores information, like name = \"Alex\" or age = 16. Common data types are strings (text), integers (whole numbers), floats (decimals), and booleans (True/False)."
+        },
+        {
+            keywords: ["loop", "for loop", "while"],
+            answer: "A loop repeats instructions. For example, for number in range(1, 4): print(number) prints 1, 2, and 3 without writing print three times. Python has for loops and while loops."
+        },
+        {
+            keywords: ["function", "def "],
+            answer: "A function is a reusable block of code that does a specific task. You define it once with def, then call it whenever you need it. Example: def greet(name): print(\"Hello, \" + name)"
+        },
+        {
+            keywords: ["conditional", "condition", "if statement", "if else", "else"],
+            answer: "Conditional statements let a program make decisions. With if / else, the program runs one block of code when a condition is true and another block when it is false."
+        },
+        {
+            keywords: ["python"],
+            answer: "Python is a beginner-friendly programming language with simple, readable code. It is used for web development, data science, automation, and AI. Example: print(\"Hello, World!\")"
+        },
+        {
+            keywords: ["html"],
+            answer: "HTML (HyperText Markup Language) is used to build the structure of a web page, such as headings, paragraphs, images, links, and buttons."
+        },
+        {
+            keywords: ["css"],
+            answer: "CSS (Cascading Style Sheets) controls how a web page looks: colors, fonts, spacing, and layout."
+        },
+        {
+            keywords: ["programming", "coding", "code"],
+            answer: "Programming is the process of writing instructions that tell a computer what to do. Programmers use languages such as Python, Java, C++, and JavaScript to create programs."
+        }
+    ];
+
+
+    // =================================
+    // STUDENT PROGRESS
+    // =================================
+
+    const STORAGE_KEY = "eduboostProgress";
+
+    let saved = {};
+
+    try {
+        saved = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+    } catch (error) {
+        saved = {};
     }
 
-    .hero h1 {
-        font-size: 2.6rem;
-        letter-spacing: -1px;
+    if (!Array.isArray(saved.completed)) {
+        saved.completed = [];
     }
 
-    .lesson-viewer,
-    .panel-white,
-    .practice-card,
-    .contact-card {
-        padding: 19px;
+    if (typeof saved.xp !== "number") {
+        saved.xp = saved.completed.length * 20;
     }
 
-    .chat-messages {
-        height: 320px;
+    if (typeof saved.streak !== "number") {
+        saved.streak = 0;
     }
 
-    .message {
-        max-width: 95%;
+    let activeLesson = null;
+
+    function getElement(id) {
+        return document.getElementById(id);
     }
-}
+
+    function saveProgress() {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
+    }
+
+
+    // =================================
+    // UPDATE DASHBOARD
+    // =================================
+
+    function updateProgress() {
+
+        const completed = saved.completed.length;
+
+        const percentage = Math.round(
+            (completed / lessons.length) * 100
+        );
+
+        getElement("dashboardProgress").textContent =
+            percentage + "%";
+
+        getElement("completedLessons").textContent =
+            completed + " / " + lessons.length;
+
+        getElement("learningStreak").textContent =
+            saved.streak + " Days";
+
+        getElement("totalXP").textContent =
+            saved.xp + " XP";
+
+        getElement("progressPercentage").textContent =
+            percentage + "%";
+
+        getElement("progressFill").style.width =
+            percentage + "%";
+
+        getElement("progressFill").setAttribute(
+            "aria-valuenow",
+            percentage
+        );
+
+        getElement("progressText").textContent =
+            completed + " of " + lessons.length +
+            " lessons completed";
+
+
+        // DISPLAY MODULE PROGRESS
+
+        let progressHTML = "";
+
+        lessons.forEach(function (lesson, index) {
+
+            const isCompleted =
+                saved.completed.includes(index);
+
+            progressHTML += `
+                <div class="module-row">
+
+                    <div>
+                        <strong>
+                            ${index + 1}. ${lesson.title}
+                        </strong>
+
+                        <br>
+
+                        <small>
+                            ${isCompleted ?
+                                "Completed" :
+                                "Not completed yet"}
+                        </small>
+                    </div>
+
+                    <span class="${isCompleted ?
+                        "text-success" : "text-muted"}">
+
+                        ${isCompleted ?
+                            '<i class="bi bi-check-circle-fill"></i>' :
+                            '<i class="bi bi-circle"></i>'}
+
+                    </span>
+
+                </div>
+            `;
+        });
+
+        getElement("progressLessons").innerHTML =
+            progressHTML;
+    }
+
+
+    // =================================
+    // OPEN LESSON
+    // =================================
+
+    function openLesson(index) {
+
+        activeLesson = Number(index);
+
+        const lesson = lessons[activeLesson];
+
+        if (!lesson) return;
+
+        getElement("lessonTitle").textContent =
+            lesson.title;
+
+        getElement("lessonDescription").textContent =
+            lesson.description;
+
+        getElement("lessonExample").textContent =
+            lesson.example;
+
+        const completed =
+            saved.completed.includes(activeLesson);
+
+        getElement("lessonStatus").textContent =
+            completed ? "Already completed!" : "";
+
+        getElement("completeLessonBtn").disabled =
+            completed;
+
+        getElement("completeLessonBtn").textContent =
+            completed ?
+                "Lesson Completed ✓" :
+                "Complete Lesson ✓";
+
+        getElement("lessonViewer").classList.remove("d-none");
+
+        getElement("lessonViewer").scrollIntoView({
+            behavior: "smooth",
+            block: "nearest"
+        });
+    }
+
+
+    // CONNECT LESSON BUTTONS
+
+    document.querySelectorAll(".open-lesson").forEach(function (button) {
+
+        button.addEventListener("click", function () {
+
+            openLesson(button.dataset.lesson);
+
+        });
+
+    });
+
+
+    // CLOSE LESSON
+
+    getElement("closeLesson").addEventListener("click", function () {
+
+        getElement("lessonViewer").classList.add("d-none");
+
+    });
+
+
+    // =================================
+    // COMPLETE LESSON
+    // =================================
+
+    getElement("completeLessonBtn").addEventListener("click", function () {
+
+        if (activeLesson === null) return;
+
+        if (saved.completed.includes(activeLesson)) return;
+
+        saved.completed.push(activeLesson);
+
+        saved.xp += 20;
+
+        saved.streak = Math.max(saved.streak, 1);
+
+        saveProgress();
+
+        updateProgress();
+
+        getElement("lessonStatus").textContent =
+            "Congratulations! You earned 20 XP!";
+
+        getElement("completeLessonBtn").disabled = true;
+
+        getElement("completeLessonBtn").textContent =
+            "Lesson Completed ✓";
+
+    });
+
+
+    // =================================
+    // LANGUAGE AND LEVEL SELECTION
+    // =================================
+
+    function updateCourse() {
+
+        const language =
+            getElement("language").value;
+
+        const level =
+            getElement("level").value;
+
+        document.querySelectorAll(
+            "#lessonCards .badge"
+        ).forEach(function (badge, index) {
+
+            badge.textContent =
+                "Lesson 0" + (index + 1) +
+                " · " + level;
+
+        });
+
+        console.log(
+            "Selected language:",
+            language,
+            "Level:",
+            level
+        );
+    }
+
+    getElement("language").addEventListener(
+        "change",
+        updateCourse
+    );
+
+    getElement("level").addEventListener(
+        "change",
+        updateCourse
+    );
+
+
+    // =================================
+    // FLOATING CHAT: OPEN / CLOSE
+    // =================================
+
+    const chatToggle = getElement("chatToggle");
+    const chatWidget = getElement("chatWidget");
+    const chatClose  = getElement("chatClose");
+
+    function setChat(open) {
+
+        chatWidget.classList.toggle("d-none", !open);
+
+        chatToggle.innerHTML = open
+            ? '<i class="bi bi-x-lg"></i>'
+            : '<i class="bi bi-robot"></i>';
+
+        if (open) {
+            getElement("userQuestion").focus();
+        }
+
+    }
+
+    chatToggle.addEventListener("click", function () {
+        setChat(chatWidget.classList.contains("d-none"));
+    });
+
+    chatClose.addEventListener("click", function () {
+        setChat(false);
+    });
+
+    document.querySelectorAll("[data-open-chat]").forEach(function (el) {
+
+        el.addEventListener("click", function (event) {
+
+            event.preventDefault();
+
+            setChat(true);
+
+        });
+
+    });
+
+
+    // =================================
+    // FLOATING CHAT: AI TUTOR
+    // =================================
+
+    // FIND AI ANSWER
+
+    function getAIResponse(question) {
+
+        const text = question.toLowerCase();
+
+        const match = tutorAnswers.find(function (item) {
+
+            return item.keywords.some(function (keyword) {
+
+                return text.includes(keyword);
+
+            });
+
+        });
+
+        if (match) {
+            return match.answer;
+        }
+
+        return "Good question! I can currently explain programming, Python, HTML, CSS, variables, data types, conditional statements, loops, and functions. Please ask about one of these topics.";
+
+    }
+
+
+    // DISPLAY CHAT MESSAGE
+
+    function addMessage(message, sender) {
+
+        const chatMessages =
+            getElement("chatMessages");
+
+        const messageElement =
+            document.createElement("div");
+
+        messageElement.classList.add(
+            "message",
+            sender + "-message"
+        );
+
+        messageElement.textContent = message;
+
+        chatMessages.appendChild(messageElement);
+
+        chatMessages.scrollTop =
+            chatMessages.scrollHeight;
+
+    }
+
+
+    // SEND CHAT MESSAGE
+
+    function sendQuestion(question) {
+
+        const cleanQuestion = question.trim();
+
+        if (!cleanQuestion) return;
+
+        addMessage(cleanQuestion, "user");
+
+        getElement("userQuestion").value = "";
+
+        setTimeout(function () {
+
+            const response =
+                getAIResponse(cleanQuestion);
+
+            addMessage(response, "bot");
+
+        }, 400);
+
+    }
+
+
+    // CHAT FORM
+
+    getElement("chatForm").addEventListener("submit", function (event) {
+
+        event.preventDefault();
+
+        sendQuestion(
+            getElement("userQuestion").value
+        );
+
+    });
+
+
+    // SUGGESTED QUESTIONS
+
+    document.querySelectorAll(".suggestion-btn").forEach(function (button) {
+
+        button.addEventListener("click", function () {
+
+            sendQuestion(button.dataset.question);
+
+        });
+
+    });
+
+
+    // =================================
+    // CODING PRACTICE
+    // =================================
+
+    getElement("checkCodeBtn").addEventListener("click", function () {
+
+        const code =
+            getElement("codeEditor").value.trim();
+
+        const result =
+            getElement("codeResult");
+
+        result.className = "feedback-box mt-3";
+
+        result.classList.remove(
+            "d-none",
+            "success",
+            "error"
+        );
+
+        // Accept either single or double quotation marks.
+        const normalized = code.replace(/\s+/g, "");
+
+        const correct =
+            /^print\((["'])Hello,World!\1\)$/i.test(normalized);
+
+        if (correct) {
+
+            result.classList.add("success");
+
+            result.textContent =
+                "Excellent! Your code is correct. You earned 10 XP!";
+
+            if (!saved.practiceCompleted) {
+
+                saved.practiceCompleted = true;
+
+                saved.xp += 10;
+
+                saveProgress();
+
+                updateProgress();
+
+            }
+
+        } else {
+
+            result.classList.add("error");
+
+            result.textContent =
+                'Not quite yet! Try print("Hello, World!") and check your spelling and quotation marks.';
+
+        }
+
+    });
+
+
+    // =================================
+    // SHOW HINT
+    // =================================
+
+    getElement("hintBtn").addEventListener("click", function () {
+
+        const hint = getElement("hint");
+
+        hint.textContent =
+            'Hint: Use the Python print() function. Example: print("Hello, World!")';
+
+        hint.classList.remove("d-none");
+
+    });
+
+
+    // =================================
+    // RESET CODE
+    // =================================
+
+    getElement("resetCodeBtn").addEventListener("click", function () {
+
+        getElement("codeEditor").value = "";
+
+        getElement("hint").classList.add("d-none");
+
+        getElement("codeResult").classList.add("d-none");
+
+    });
+
+
+    // =================================
+    // CONTACT FORM
+    // =================================
+
+    getElement("contactForm").addEventListener("submit", function (event) {
+
+        event.preventDefault();
+
+        getElement("contactStatus").textContent =
+            "Thank you! Your message has been recorded in this demo. No email was sent.";
+
+        getElement("contactForm").reset();
+
+    });
+
+
+    // =================================
+    // NAVIGATION ACTIVE LINK
+    // =================================
+
+    // Skip the AI Tutor link (href="#"): "#" is not a valid selector
+    const navLinks =
+        document.querySelectorAll(
+            '.navbar .nav-link[href^="#"]:not([data-open-chat])'
+        );
+
+    const sections = Array.from(navLinks)
+        .map(function (link) {
+            return document.querySelector(link.getAttribute("href"));
+        })
+        .filter(Boolean);
+
+    if ("IntersectionObserver" in window) {
+
+        const observer = new IntersectionObserver(
+
+            function (entries) {
+
+                entries.forEach(function (entry) {
+
+                    if (entry.isIntersecting) {
+
+                        navLinks.forEach(function (link) {
+
+                            link.classList.toggle(
+                                "active",
+                                link.getAttribute("href") ===
+                                "#" + entry.target.id
+                            );
+
+                        });
+
+                    }
+
+                });
+
+            },
+
+            {
+                rootMargin: "-30% 0px -60% 0px"
+            }
+
+        );
+
+        sections.forEach(function (section) {
+
+            observer.observe(section);
+
+        });
+
+    }
+
+
+    // =================================
+    // INITIALIZE DASHBOARD
+    // =================================
+
+    updateProgress();
+
+});
