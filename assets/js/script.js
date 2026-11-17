@@ -34,6 +34,46 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // =================================
+    // AI TUTOR ANSWERS
+    // =================================
+
+    const tutorAnswers = [
+        {
+            keywords: ["variable", "data type", "datatype"],
+            answer: "A variable is a named container that stores information, like name = \"Alex\" or age = 16. Common data types are strings (text), integers (whole numbers), floats (decimals), and booleans (True/False)."
+        },
+        {
+            keywords: ["loop", "for loop", "while"],
+            answer: "A loop repeats instructions. For example, for number in range(1, 4): print(number) prints 1, 2, and 3 without writing print three times. Python has for loops and while loops."
+        },
+        {
+            keywords: ["function", "def "],
+            answer: "A function is a reusable block of code that does a specific task. You define it once with def, then call it whenever you need it. Example: def greet(name): print(\"Hello, \" + name)"
+        },
+        {
+            keywords: ["conditional", "condition", "if statement", "if else", "else"],
+            answer: "Conditional statements let a program make decisions. With if / else, the program runs one block of code when a condition is true and another block when it is false."
+        },
+        {
+            keywords: ["python"],
+            answer: "Python is a beginner-friendly programming language with simple, readable code. It is used for web development, data science, automation, and AI. Example: print(\"Hello, World!\")"
+        },
+        {
+            keywords: ["html"],
+            answer: "HTML (HyperText Markup Language) is used to build the structure of a web page, such as headings, paragraphs, images, links, and buttons."
+        },
+        {
+            keywords: ["css"],
+            answer: "CSS (Cascading Style Sheets) controls how a web page looks: colors, fonts, spacing, and layout."
+        },
+        {
+            keywords: ["programming", "coding", "code"],
+            answer: "Programming is the process of writing instructions that tell a computer what to do. Programmers use languages such as Python, Java, C++, and JavaScript to create programs."
+        }
+    ];
+
+
+    // =================================
     // STUDENT PROGRESS
     // =================================
 
@@ -293,63 +333,51 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // =================================
-    // CODEMATE AI TUTOR
+    // FLOATING CHAT: OPEN / CLOSE
     // =================================
 
-    const tutorAnswers = [
+    const chatToggle = getElement("chatToggle");
+    const chatWidget = getElement("chatWidget");
+    const chatClose  = getElement("chatClose");
 
-        {
-            keywords: ["programming", "program"],
-            answer: "Programming is the process of writing instructions that tell a computer what to do. Programmers use languages such as Python, Java, C++, and JavaScript."
-        },
+    function setChat(open) {
 
-        {
-            keywords: ["variable", "variables"],
-            answer: "A variable is a named storage location used to store information. For example: name = 'Alex'. The variable name stores the value Alex."
-        },
+        chatWidget.classList.toggle("d-none", !open);
 
-        {
-            keywords: ["data type", "string", "integer", "float", "boolean"],
-            answer: "Data types describe the kind of information stored in a variable. String means text, integer means whole number, float means decimal number, and boolean means True or False."
-        },
+        chatToggle.innerHTML = open
+            ? '<i class="bi bi-x-lg"></i>'
+            : '<i class="bi bi-robot"></i>';
 
-        {
-            keywords: ["conditional", "if statement", "decision"],
-            answer: "Conditional statements allow programs to make decisions. In Python, an if statement checks whether a condition is true or false."
-        },
-
-        {
-            keywords: ["loop", "loops", "for loop", "while loop"],
-            answer: "Loops repeat instructions. A for loop repeats instructions a specific number of times, while a while loop repeats as long as a condition is true."
-        },
-
-        {
-            keywords: ["function", "functions"],
-            answer: "A function is a reusable block of code that performs a specific task. In Python, functions are created using the def keyword."
-        },
-
-        {
-            keywords: ["python"],
-            answer: "Python is a beginner-friendly programming language used for web development, automation, data analysis, and artificial intelligence."
-        },
-
-        {
-            keywords: ["html"],
-            answer: "HTML stands for HyperText Markup Language. It is used to create the structure of web pages."
-        },
-
-        {
-            keywords: ["css"],
-            answer: "CSS stands for Cascading Style Sheets. It controls the appearance of a website, including colors, fonts, spacing, and layouts."
-        },
-
-        {
-            keywords: ["javascript"],
-            answer: "JavaScript is a programming language used to make websites interactive. It can respond to clicks, validate forms, and update web content."
+        if (open) {
+            getElement("userQuestion").focus();
         }
 
-    ];
+    }
 
+    chatToggle.addEventListener("click", function () {
+        setChat(chatWidget.classList.contains("d-none"));
+    });
+
+    chatClose.addEventListener("click", function () {
+        setChat(false);
+    });
+
+    document.querySelectorAll("[data-open-chat]").forEach(function (el) {
+
+        el.addEventListener("click", function (event) {
+
+            event.preventDefault();
+
+            setChat(true);
+
+        });
+
+    });
+
+
+    // =================================
+    // FLOATING CHAT: AI TUTOR
+    // =================================
 
     // FIND AI ANSWER
 
@@ -559,9 +587,10 @@ document.addEventListener("DOMContentLoaded", function () {
     // NAVIGATION ACTIVE LINK
     // =================================
 
+    // Skip the AI Tutor link (href="#"): "#" is not a valid selector
     const navLinks =
         document.querySelectorAll(
-            '.navbar .nav-link[href^="#"]'
+            '.navbar .nav-link[href^="#"]:not([data-open-chat])'
         );
 
     const sections = Array.from(navLinks)
