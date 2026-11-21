@@ -28,11 +28,10 @@
         <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
         <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
         <li class="nav-item"><a class="nav-link" href="#courses">Courses</a></li>
-        <li class="nav-item"><a class="nav-link" href="#dashboard">Dashboard</a></li>
-        <li class="nav-item"><a class="nav-link" href="#" data-open-chat>AI Tutor</a></li>
-        <li class="nav-item"><a class="nav-link" href="#practice">Practice</a></li>
         <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-        <li class="nav-item"><a class="btn btn-brand btn-sm" href="#courses">Start Learning</a></li>
+        <li class="nav-item"><a class="nav-link" href="pages/dashboard.html">Dashboard</a></li>
+        <li class="nav-item"><a class="btn btn-outline-dark btn-sm" href="pages/login.html">Log In</a></li>
+        <li class="nav-item"><a class="btn btn-brand btn-sm" href="pages/signup.html">Sign Up</a></li>
       </ul>
     </div>
   </div>
@@ -53,7 +52,7 @@
           coding challenges, progress tracking, and your CodeMate AI tutor.
         </p>
         <a href="#courses" class="btn btn-brand btn-lg me-2">Explore Lessons</a>
-        <a href="#" data-open-chat class="btn btn-outline-light btn-lg">Ask AI Tutor</a>
+        <a href="pages/dashboard.html" class="btn btn-outline-light btn-lg">Ask AI Tutor</a>
       </div>
 
       <div class="col-lg-5 d-none d-lg-block">
@@ -137,7 +136,7 @@ start_learning()</pre>
           <li><i class="bi bi-check-circle-fill text-success"></i> Multiple programming languages</li>
           <li><i class="bi bi-check-circle-fill text-success"></i> Progress tracking and XP points</li>
         </ul>
-        <a href="#dashboard" class="btn btn-brand">View Dashboard</a>
+        <a href="pages/dashboard.html" class="btn btn-brand">View Dashboard</a>
       </div>
     </div>
   </div>
@@ -245,133 +244,8 @@ start_learning()</pre>
   </div>
 </section>
 
-<!-- DASHBOARD -->
-<section id="dashboard" class="py-5 bg-white">
-  <div class="container py-4">
-    <h2 class="fw-bold mb-4">My Learning Dashboard 📊</h2>
-
-    <div class="row g-3">
-      <div class="col-6 col-lg-3">
-        <div class="stat-card">
-          <i class="bi bi-graph-up"></i>
-          <p>Learning Progress</p>
-          <h3 id="dashboardProgress">0%</h3>
-        </div>
-      </div>
-
-      <div class="col-6 col-lg-3">
-        <div class="stat-card">
-          <i class="bi bi-book"></i>
-          <p>Lessons Completed</p>
-          <h3 id="completedLessons">0 / 5</h3>
-        </div>
-      </div>
-
-      <div class="col-6 col-lg-3">
-        <div class="stat-card">
-          <i class="bi bi-fire"></i>
-          <p>Learning Streak</p>
-          <h3 id="learningStreak">0 Days</h3>
-        </div>
-      </div>
-
-      <div class="col-6 col-lg-3">
-        <div class="stat-card">
-          <i class="bi bi-trophy"></i>
-          <p>Total Points</p>
-          <h3 id="totalXP">0 XP</h3>
-        </div>
-      </div>
-    </div>
-
-    <div class="panel-white mt-4">
-      <h5>Overall Course Completion</h5>
-      <h3 id="progressPercentage">0%</h3>
-      <div class="progress">
-        <div id="progressFill" class="progress-bar" style="width:0%"></div>
-      </div>
-      <p id="progressText" class="text-muted mt-2">0 of 5 lessons completed</p>
-    </div>
-
-    <div class="panel-white mt-3">
-      <h5>Learning Modules</h5>
-      <div id="progressLessons"></div>
-    </div>
-  </div>
-</section>
-
-<!-- FLOATING AI TUTOR (lower right) -->
-<button id="chatToggle" class="chat-fab" type="button" aria-label="Open CodeMate AI">
-  <i class="bi bi-robot"></i>
-</button>
-
-<div id="chatWidget" class="chat-widget chat-container d-none">
-  <div class="chat-header">
-    <i class="bi bi-robot"></i>
-    <div>
-      <h5>CodeMate AI Assistant</h5>
-      <small>● Ready to help</small>
-    </div>
-    <button id="chatClose" class="chat-close" type="button" aria-label="Close chat">
-      <i class="bi bi-x-lg"></i>
-    </button>
-  </div>
-
-  <div class="chat-messages" id="chatMessages">
-    <div class="message bot-message">
-      Hello, student! I am CodeMate AI.
-      What programming topic would you like to learn?
-    </div>
-  </div>
-
-  <div class="suggestions">
-    <button class="suggestion-btn" data-question="What is programming?">What is programming?</button>
-    <button class="suggestion-btn" data-question="What are variables?">What are variables?</button>
-    <button class="suggestion-btn" data-question="Explain loops.">Explain loops</button>
-  </div>
-
-  <form id="chatForm" class="chat-input">
-    <input type="text" id="userQuestion" class="form-control"
-      placeholder="Ask your programming question..." required>
-    <button class="btn btn-brand" type="submit">Send ➤</button>
-  </form>
-
-  <p class="chat-note">Demo assistant using prepared explanations.</p>
-</div>
-
-<!-- CODING PRACTICE -->
-<section id="practice" class="py-5 bg-white">
-  <div class="container py-4">
-    <div class="text-center mb-4">
-      <h2 class="fw-bold">Coding Practice Lab ⌨</h2>
-      <p class="text-muted">Test your programming knowledge.</p>
-    </div>
-
-    <div class="practice-card mx-auto">
-      <span class="badge bg-brand">Challenge 01 - Beginner</span>
-      <h3 class="mt-3">Hello, World!</h3>
-      <p>Write a Python program that displays this message:</p>
-
-      <div class="expected-output">Hello, World!</div>
-
-      <label for="codeEditor" class="form-label mt-3">Write your code:</label>
-      <textarea id="codeEditor" class="form-control code-editor" rows="5"
-        placeholder='print("Hello, World!")'></textarea>
-
-      <div class="mt-3 d-flex gap-2 flex-wrap">
-        <button id="checkCodeBtn" class="btn btn-brand">Check My Code ✓</button>
-        <button id="hintBtn" class="btn btn-outline-secondary">💡 Show Hint</button>
-        <button id="resetCodeBtn" class="btn btn-light">Reset</button>
-      </div>
-
-      <div id="hint" class="feedback-box d-none mt-3"></div>
-      <div id="codeResult" class="feedback-box d-none mt-2"></div>
-    </div>
-  </div>
-</section>
-
 <!-- CONTACT -->
-<section id="contact" class="py-5">
+<section id="contact" class="py-5 bg-white">
   <div class="container py-4">
     <div class="col-lg-6 mx-auto">
       <h2 class="fw-bold text-center mb-4">Contact Us</h2>
