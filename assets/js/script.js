@@ -1,6 +1,275 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     // =================================
+    // HELPERS (safe on every page)
+    // =================================
+
+    function getElement(id) {
+        return document.getElementById(id);
+    }
+
+    // Add an event listener only if the element exists on this page
+    function on(id, eventName, handler) {
+        const el = getElement(id);
+        if (el) el.addEventListener(eventName, handler);
+    }
+
+    function setText(id, text) {
+        const el = getElement(id);
+        if (el) el.textContent = text;
+    }
+
+
+    // =================================
+    // STUDENT DASHBOARD (only on dashboard.html)
+    // =================================
+
+    if (document.body.classList.contains("dash-page")) {
+
+        let user = null;
+
+        try {
+            user = JSON.parse(localStorage.getItem("codemateUser"));
+        } catch (error) {
+            user = null;
+        }
+
+        // Not signed in: back to login
+        if (!user) {
+            window.location.replace("login.html");
+            return;
+        }
+
+        const fullName = user.name || "Student";
+        const firstName = fullName.split(" ")[0];
+
+        setText("userName", fullName);
+        setText("welcomeName", firstName);
+
+        function logout(event) {
+            event.preventDefault();
+            localStorage.removeItem("codemateUser");
+            window.location.href = "login.html";
+        }
+
+        on("logoutBtn", "click", logout);
+        on("logoutMenu", "click", logout);
+
+        const sidebar = getElement("sidebar");
+
+        on("sidebarToggle", "click", function () {
+            if (sidebar) sidebar.classList.toggle("open");
+        });
+
+        // Close the mobile sidebar after choosing a link
+        document.querySelectorAll(".sidebar-nav a").forEach(function (link) {
+            link.addEventListener("click", function () {
+                if (sidebar) sidebar.classList.remove("open");
+            });
+        });
+
+        // Highlight the sidebar link of the section being viewed
+        const spyLinks = Array.from(
+            document.querySelectorAll('.sidebar-nav a[href^="#"]:not([href="#"])')
+        );
+
+        const spySections = spyLinks
+            .map(function (link) {
+                return document.querySelector(link.getAttribute("href"));
+            })
+            .filter(Boolean);
+
+        if ("IntersectionObserver" in window) {
+
+            const spy = new IntersectionObserver(function (entries) {
+
+                entries.forEach(function (entry) {
+
+                    if (entry.isIntersecting) {
+
+                        spyLinks.forEach(function (link) {
+                            link.classList.toggle(
+                                "active",
+                                link.getAttribute("href") === "#" + entry.target.id
+                            );
+                        });
+
+                    }
+
+                });
+
+            }, { rootMargin: "-30% 0px -60% 0px" });
+
+            spySections.forEach(function (section) {
+                spy.observe(section);
+            });
+
+        }
+    }
+
+
+    // =================================
+    // LOGIN / SIGN UP
+    // =================================
+
+(() => {
+  'use strict';
+
+  // Where to go after a successful sign in / sign up (login.html and dashboard.html are both in /pages)
+  const REDIRECT_URL = 'dashboard.html';
+  const SWITCH_MS = 750; // keep in sync with --slide in style.css
+
+  const container = document.querySelector('.container');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const stacked = window.matchMedia('(max-width: 760px)');
+
+  /* ---------- Slide between Sign in and Sign up ---------- */
+  const switchLink = document.querySelector('.overlay .btn-light');
+  let switching = false;
+
+  if (container && switchLink) {
+    switchLink.addEventListener('click', (e) => {
+      // Let new-tab clicks and plain navigation (small screens, reduced motion) work normally
+      if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey) return;
+      if (reduceMotion.matches || stacked.matches) return;
+
+      e.preventDefault();
+      if (switching) return;
+      switching = true;
+      container.classList.add('is-switching');
+
+      const href = switchLink.href;
+      setTimeout(() => { window.location.href = href; }, SWITCH_MS);
+    });
+
+    // Back button restores the page from cache: reset the animation state
+    window.addEventListener('pageshow', (e) => {
+      if (e.persisted) {
+        switching = false;
+        container.classList.remove('is-switching');
+      }
+    });
+  }
+
+  /* ---------- Validation ---------- */
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  let errorCount = 0;
+
+  const rules = {
+    text: (v) => (v.trim().length >= 2 ? '' : 'Please enter your name.'),
+    email: (v) => {
+      if (!v.trim()) return 'Please enter your email.';
+      return EMAIL_RE.test(v.trim()) ? '' : 'Enter a valid email address.';
+    },
+    password: (v, isSignUp) => {
+      if (!v) return 'Please enter your password.';
+      return isSignUp && v.length < 8 ? 'Use at least 8 characters.' : '';
+    },
+  };
+
+  function setError(input, message) {
+    let note = input.nextElementSibling;
+    if (!note || !note.classList.contains('error')) {
+      if (!message) return;
+      note = document.createElement('p');
+      note.className = 'error';
+      note.id = 'error-' + (++errorCount);
+      note.setAttribute('role', 'alert');
+      input.insertAdjacentElement('afterend', note);
+      input.setAttribute('aria-describedby', note.id);
+    }
+    note.textContent = message;
+    note.hidden = !message;
+    input.classList.toggle('is-invalid', Boolean(message));
+    input.setAttribute('aria-invalid', message ? 'true' : 'false');
+  }
+
+  /* ---------- Remember who signed in (used by the dashboard) ---------- */
+  function saveUser(form, isSignUp) {
+    const emailInput = form.querySelector('input[type="email"]');
+    const email = emailInput ? emailInput.value.trim() : '';
+
+    let account = null;
+    try {
+      account = JSON.parse(localStorage.getItem('codemateAccount'));
+    } catch (error) {
+      account = null;
+    }
+
+    let name = '';
+
+    if (isSignUp) {
+      // Sign up: join all name fields (first + last name)
+      name = Array.from(form.querySelectorAll('input[type="text"]'))
+        .map((input) => input.value.trim())
+        .filter(Boolean)
+        .join(' ');
+
+      localStorage.setItem('codemateAccount', JSON.stringify({ name: name, email: email }));
+    } else if (account && account.email &&
+               account.email.toLowerCase() === email.toLowerCase()) {
+      // Login with the email that signed up on this browser
+      name = account.name;
+    } else {
+      // Fallback: use the part of the email before the @
+      const local = email.split('@')[0] || 'Student';
+      name = local.charAt(0).toUpperCase() + local.slice(1);
+    }
+
+    localStorage.setItem('codemateUser', JSON.stringify({ name: name || 'Student', email: email }));
+  }
+
+  function initForm(form, isSignUp) {
+    if (!form) return;
+    const fields = Array.from(form.querySelectorAll('input.input'));
+
+    const check = (input) => {
+      const rule = rules[input.type];
+      const message = rule ? rule(input.value, isSignUp) : '';
+      setError(input, message);
+      return !message;
+    };
+
+    fields.forEach((input) => {
+      input.addEventListener('input', () => {
+        if (input.classList.contains('is-invalid')) check(input);
+      });
+      input.addEventListener('blur', () => {
+        if (input.value) check(input);
+      });
+    });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const results = fields.map(check);
+      const firstBad = results.indexOf(false);
+      if (firstBad !== -1) {
+        fields[firstBad].focus();
+        return;
+      }
+
+      const button = form.querySelector('button[type="submit"]');
+      button.disabled = true;
+      button.textContent = isSignUp ? 'Creating account...' : 'Signing in...';
+
+      // Save the signed-in user so the dashboard can show their name
+      saveUser(form, isSignUp);
+
+      // TODO: send the form to your backend here, then redirect when it succeeds.
+      setTimeout(() => { window.location.href = REDIRECT_URL; }, 600);
+    });
+  }
+
+  initForm(document.getElementById('signInForm'), false);
+  initForm(document.getElementById('signUpForm'), true);
+
+  /* "Forgot your password?" has no page yet: stop it jumping to the top */
+  document.querySelectorAll('a.forgot[href="#"]').forEach((link) => {
+    link.addEventListener('click', (e) => e.preventDefault());
+  });
+})();
+
+    // =================================
     // LESSON DATA
     // =================================
 
@@ -101,17 +370,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let activeLesson = null;
 
-    function getElement(id) {
-        return document.getElementById(id);
-    }
-
     function saveProgress() {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
     }
 
 
     // =================================
-    // UPDATE DASHBOARD
+    // UPDATE PROGRESS (skips anything not on this page)
     // =================================
 
     function updateProgress() {
@@ -122,35 +387,29 @@ document.addEventListener("DOMContentLoaded", function () {
             (completed / lessons.length) * 100
         );
 
-        getElement("dashboardProgress").textContent =
-            percentage + "%";
-
-        getElement("completedLessons").textContent =
-            completed + " / " + lessons.length;
-
-        getElement("learningStreak").textContent =
-            saved.streak + " Days";
-
-        getElement("totalXP").textContent =
-            saved.xp + " XP";
-
-        getElement("progressPercentage").textContent =
-            percentage + "%";
-
-        getElement("progressFill").style.width =
-            percentage + "%";
-
-        getElement("progressFill").setAttribute(
-            "aria-valuenow",
-            percentage
+        setText("dashboardProgress", percentage + "%");
+        setText("completedLessons", completed + " / " + lessons.length);
+        setText("learningStreak", saved.streak + " Days");
+        setText("totalXP", saved.xp + " XP");
+        setText("progressPercentage", percentage + "%");
+        setText(
+            "progressText",
+            completed + " of " + lessons.length + " lessons completed"
         );
 
-        getElement("progressText").textContent =
-            completed + " of " + lessons.length +
-            " lessons completed";
+        const progressFill = getElement("progressFill");
+
+        if (progressFill) {
+            progressFill.style.width = percentage + "%";
+            progressFill.setAttribute("aria-valuenow", percentage);
+        }
 
 
         // DISPLAY MODULE PROGRESS
+
+        const progressLessons = getElement("progressLessons");
+
+        if (!progressLessons) return;
 
         let progressHTML = "";
 
@@ -189,8 +448,7 @@ document.addEventListener("DOMContentLoaded", function () {
             `;
         });
 
-        getElement("progressLessons").innerHTML =
-            progressHTML;
+        progressLessons.innerHTML = progressHTML;
     }
 
 
@@ -200,38 +458,41 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function openLesson(index) {
 
+        const viewer = getElement("lessonViewer");
+
+        if (!viewer) return;
+
         activeLesson = Number(index);
 
         const lesson = lessons[activeLesson];
 
         if (!lesson) return;
 
-        getElement("lessonTitle").textContent =
-            lesson.title;
-
-        getElement("lessonDescription").textContent =
-            lesson.description;
-
-        getElement("lessonExample").textContent =
-            lesson.example;
+        setText("lessonTitle", lesson.title);
+        setText("lessonDescription", lesson.description);
+        setText("lessonExample", lesson.example);
 
         const completed =
             saved.completed.includes(activeLesson);
 
-        getElement("lessonStatus").textContent =
-            completed ? "Already completed!" : "";
+        setText(
+            "lessonStatus",
+            completed ? "Already completed!" : ""
+        );
 
-        getElement("completeLessonBtn").disabled =
-            completed;
+        const completeBtn = getElement("completeLessonBtn");
 
-        getElement("completeLessonBtn").textContent =
-            completed ?
-                "Lesson Completed ✓" :
-                "Complete Lesson ✓";
+        if (completeBtn) {
+            completeBtn.disabled = completed;
+            completeBtn.textContent =
+                completed ?
+                    "Lesson Completed ✓" :
+                    "Complete Lesson ✓";
+        }
 
-        getElement("lessonViewer").classList.remove("d-none");
+        viewer.classList.remove("d-none");
 
-        getElement("lessonViewer").scrollIntoView({
+        viewer.scrollIntoView({
             behavior: "smooth",
             block: "nearest"
         });
@@ -253,7 +514,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // CLOSE LESSON
 
-    getElement("closeLesson").addEventListener("click", function () {
+    on("closeLesson", "click", function () {
 
         getElement("lessonViewer").classList.add("d-none");
 
@@ -264,7 +525,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // COMPLETE LESSON
     // =================================
 
-    getElement("completeLessonBtn").addEventListener("click", function () {
+    on("completeLessonBtn", "click", function () {
 
         if (activeLesson === null) return;
 
@@ -280,13 +541,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
         updateProgress();
 
-        getElement("lessonStatus").textContent =
-            "Congratulations! You earned 20 XP!";
+        setText("lessonStatus", "Congratulations! You earned 20 XP!");
 
-        getElement("completeLessonBtn").disabled = true;
+        const completeBtn = getElement("completeLessonBtn");
 
-        getElement("completeLessonBtn").textContent =
-            "Lesson Completed ✓";
+        completeBtn.disabled = true;
+
+        completeBtn.textContent = "Lesson Completed ✓";
 
     });
 
@@ -321,15 +582,8 @@ document.addEventListener("DOMContentLoaded", function () {
         );
     }
 
-    getElement("language").addEventListener(
-        "change",
-        updateCourse
-    );
-
-    getElement("level").addEventListener(
-        "change",
-        updateCourse
-    );
+    on("language", "change", updateCourse);
+    on("level", "change", updateCourse);
 
 
     // =================================
@@ -342,6 +596,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function setChat(open) {
 
+        if (!chatWidget || !chatToggle) return;
+
         chatWidget.classList.toggle("d-none", !open);
 
         chatToggle.innerHTML = open
@@ -349,18 +605,27 @@ document.addEventListener("DOMContentLoaded", function () {
             : '<i class="bi bi-robot"></i>';
 
         if (open) {
-            getElement("userQuestion").focus();
+            const question = getElement("userQuestion");
+            if (question) question.focus();
         }
 
     }
 
-    chatToggle.addEventListener("click", function () {
-        setChat(chatWidget.classList.contains("d-none"));
-    });
+    if (chatToggle && chatWidget) {
 
-    chatClose.addEventListener("click", function () {
-        setChat(false);
-    });
+        chatToggle.addEventListener("click", function () {
+            setChat(chatWidget.classList.contains("d-none"));
+        });
+
+    }
+
+    if (chatClose) {
+
+        chatClose.addEventListener("click", function () {
+            setChat(false);
+        });
+
+    }
 
     document.querySelectorAll("[data-open-chat]").forEach(function (el) {
 
@@ -411,6 +676,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const chatMessages =
             getElement("chatMessages");
 
+        if (!chatMessages) return;
+
         const messageElement =
             document.createElement("div");
 
@@ -439,7 +706,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
         addMessage(cleanQuestion, "user");
 
-        getElement("userQuestion").value = "";
+        const input = getElement("userQuestion");
+
+        if (input) input.value = "";
 
         setTimeout(function () {
 
@@ -455,7 +724,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // CHAT FORM
 
-    getElement("chatForm").addEventListener("submit", function (event) {
+    on("chatForm", "submit", function (event) {
 
         event.preventDefault();
 
@@ -483,7 +752,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // CODING PRACTICE
     // =================================
 
-    getElement("checkCodeBtn").addEventListener("click", function () {
+    on("checkCodeBtn", "click", function () {
 
         const code =
             getElement("codeEditor").value.trim();
@@ -540,7 +809,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // SHOW HINT
     // =================================
 
-    getElement("hintBtn").addEventListener("click", function () {
+    on("hintBtn", "click", function () {
 
         const hint = getElement("hint");
 
@@ -556,7 +825,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // RESET CODE
     // =================================
 
-    getElement("resetCodeBtn").addEventListener("click", function () {
+    on("resetCodeBtn", "click", function () {
 
         getElement("codeEditor").value = "";
 
@@ -571,12 +840,14 @@ document.addEventListener("DOMContentLoaded", function () {
     // CONTACT FORM
     // =================================
 
-    getElement("contactForm").addEventListener("submit", function (event) {
+    on("contactForm", "submit", function (event) {
 
         event.preventDefault();
 
-        getElement("contactStatus").textContent =
-            "Thank you! Your message has been recorded in this demo. No email was sent.";
+        setText(
+            "contactStatus",
+            "Thank you! Your message has been recorded in this demo. No email was sent."
+        );
 
         getElement("contactForm").reset();
 
@@ -641,7 +912,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // =================================
-    // INITIALIZE DASHBOARD
+    // INITIALIZE
     // =================================
 
     updateProgress();
