@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap');
 
+/* =========================================================
+   PART 1: MAIN WEBSITE
+   ========================================================= */
+
 :root {
     --brand: #635bdb;
     --brand-dark: #4942b5;
@@ -286,7 +290,7 @@ section {
     border-bottom: 1px solid #e9eaf3;
 }
 
-/* Floating chat button */
+/* ===== Floating chat button ===== */
 .chat-fab {
   position: fixed;
   right: 20px;
@@ -304,23 +308,6 @@ section {
   transition: transform .2s;
 }
 .chat-fab:hover { transform: scale(1.08); }
-
-//* ===== Floating chat button ===== */
-.chat-fab {
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  width: 60px;
-  height: 60px;
-  border: none;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #6c5ce7, #4f46e5);
-  color: #fff;
-  font-size: 1.6rem;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, .25);
-  z-index: 1060;
-  cursor: pointer;
-}
 
 /* ===== Chat window ===== */
 #chatWidget {
@@ -512,7 +499,7 @@ footer a:hover {
     color: #c9c5ff;
 }
 
-/* RESPONSIVE */
+/* RESPONSIVE (main site) */
 
 @media (max-width: 767px) {
     .min-vh-hero {
@@ -540,4 +527,529 @@ footer a:hover {
     .message {
         max-width: 95%;
     }
+}
+
+
+/* =========================================================
+   PART 2: LOG IN / SIGN UP  (scoped to body.auth-page)
+   ========================================================= */
+
+.auth-page {
+  --a-bg: #eceefb;                              /* soft lavender surface */
+  --a-shadow-dark: rgba(120, 126, 178, 0.38);
+  --a-shadow-light: #ffffff;
+  --a-danger: #d6453d;
+  --a-slide: 0.75s cubic-bezier(0.65, 0, 0.25, 1);  /* keep in sync with SWITCH_MS in script.js */
+}
+
+.auth-page,
+.auth-page * { margin: 0; padding: 0; box-sizing: border-box; }
+
+body.auth-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: clamp(12px, 3vh, 24px);
+  background: var(--a-bg);
+  font-family: 'DM Sans', sans-serif;
+  color: var(--ink);
+}
+
+.auth-page :focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; }
+
+/* ---------- Card ---------- */
+.auth-page .container {
+  position: relative;
+  width: 1000px;
+  max-width: 100%;
+  height: clamp(580px, calc(100vh - 48px), 680px);
+  overflow: hidden;
+  border-radius: 18px;
+  background: var(--a-bg);
+  box-shadow: 12px 12px 28px var(--a-shadow-dark), -12px -12px 28px var(--a-shadow-light);
+}
+
+.auth-page .form-box,
+.auth-page .overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  transition: left var(--a-slide);
+}
+.auth-page .form-box { width: 60%; z-index: 1; background: var(--a-bg); }
+.auth-page .overlay  { width: 40%; z-index: 2; }
+
+/* Login: form left, panel right.  Sign up: panel left, form right. */
+.auth-page .page-signin .form-box { left: 0; }
+.auth-page .page-signin .overlay  { left: 60%; }
+.auth-page .page-signup .overlay  { left: 0; }
+.auth-page .page-signup .form-box { left: 40%; }
+
+/* Slide animation (script.js adds .is-switching): the two panels swap places */
+.auth-page .page-signin.is-switching .form-box { left: 40%; }
+.auth-page .page-signin.is-switching .overlay  { left: 0; }
+.auth-page .page-signup.is-switching .form-box { left: 0; }
+.auth-page .page-signup.is-switching .overlay  { left: 60%; }
+
+.auth-page .form-box form,
+.auth-page .overlay-content { transition: opacity 0.3s ease; }
+.auth-page .is-switching .form-box form,
+.auth-page .is-switching .overlay-content { opacity: 0; }
+
+/* ---------- Form: one centered column, every row the same width ---------- */
+.auth-page .form-box form {
+  width: 100%;
+  max-width: 420px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  justify-content: safe center;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.auth-page .title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+  text-align: center;
+  color: var(--ink);
+}
+.auth-page .form-box .title { font-size: 1.65rem; }
+
+.auth-page .subtitle {
+  margin: 8px 0 14px;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--muted);
+}
+
+.auth-page .field {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 12px;
+}
+.auth-page .row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 14px;
+  width: 100%;
+}
+
+.auth-page .label {
+  display: block;
+  margin: 0 0 6px 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--ink);
+}
+
+/* ---------- Neumorphic controls ---------- */
+.auth-page .input,
+.auth-page .select {
+  display: block;
+  width: 100%;
+  height: 42px;
+  padding: 0 16px;
+  border: none;
+  border-radius: 10px;
+  outline: 2px solid transparent;
+  background: var(--a-bg);
+  font: 500 0.85rem 'DM Sans', sans-serif;
+  color: var(--ink);
+  box-shadow: inset 4px 4px 8px var(--a-shadow-dark), inset -4px -4px 8px var(--a-shadow-light);
+  transition: outline-color 0.2s ease;
+}
+.auth-page .input::placeholder { color: #8d91a8; }
+.auth-page .input:focus-visible,
+.auth-page .select:focus-visible { outline-color: var(--brand); outline-offset: 0; }
+.auth-page .input.is-invalid,
+.auth-page .select.is-invalid { outline-color: var(--a-danger); }
+
+.auth-page .select {
+  appearance: none;
+  padding-right: 40px;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2320233a' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 16px;
+}
+.auth-page .select:invalid { color: #8d91a8; }
+
+.auth-page .error {
+  margin: 6px 0 0 4px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--a-danger);
+}
+
+/* Checkbox */
+.auth-page .check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--ink);
+  cursor: pointer;
+}
+.auth-page .check input {
+  appearance: none;
+  flex: none;
+  width: 20px;
+  height: 20px;
+  display: grid;
+  place-content: center;
+  border-radius: 6px;
+  background: var(--a-bg);
+  cursor: pointer;
+  box-shadow: inset 2px 2px 5px var(--a-shadow-dark), inset -2px -2px 5px var(--a-shadow-light);
+  transition: background 0.2s ease;
+}
+.auth-page .check input::after {
+  content: "";
+  width: 10px;
+  height: 5px;
+  border-left: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: rotate(-45deg) translate(1px, -1px) scale(0);
+  transition: transform 0.15s ease;
+}
+.auth-page .check input:checked { background: var(--brand); }
+.auth-page .check input:checked::after { transform: rotate(-45deg) translate(1px, -1px) scale(1); }
+.auth-page .check a { color: var(--brand); font-weight: 600; }
+
+/* Remember me + Forgot password on one line */
+.auth-page .form-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 16px;
+}
+.auth-page .forgot {
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--brand);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(99, 91, 219, 0.35);
+  padding-bottom: 2px;
+}
+.auth-page .forgot:hover { color: var(--brand-dark); border-color: var(--brand-dark); }
+
+/* ---------- Buttons ---------- */
+.auth-page .btn {
+  display: inline-grid;
+  place-items: center;
+  height: 46px;
+  padding: 0 34px;
+  border: none;
+  border-radius: 999px;
+  font: 700 0.74rem 'DM Sans', sans-serif;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.25s, background 0.25s, opacity 0.2s;
+}
+.auth-page .btn:active { transform: scale(0.97); }
+.auth-page .btn:disabled { opacity: 0.6; cursor: progress; }
+
+.auth-page .btn-block { display: grid; width: 100%; margin-top: 22px; }
+.auth-page .field + .btn-block { margin-top: 20px; }
+
+/* Main action button (same color as .btn-brand) */
+.auth-page .btn-dark {
+  background: var(--brand);
+  color: #fff;
+  box-shadow: 6px 6px 12px var(--a-shadow-dark), -6px -6px 12px var(--a-shadow-light);
+}
+.auth-page .btn-dark:hover {
+  background: var(--brand-dark);
+  box-shadow: inset 3px 3px 6px rgba(0, 0, 0, .3), inset -3px -3px 6px rgba(255, 255, 255, .12);
+}
+
+/* Button on the gradient side panel */
+.auth-page .btn-light {
+  margin-top: 6px;
+  min-width: 170px;
+  background: #fff;
+  color: var(--brand-dark);
+  box-shadow: 0 8px 20px rgba(23, 22, 61, 0.35);
+}
+.auth-page .btn-light:hover { background: #f1f0ff; }
+
+/* ---------- Side panel (same gradient as the hero) ---------- */
+.auth-page .overlay {
+  overflow: hidden;
+  color: #fff;
+  background:
+    radial-gradient(circle at 80% 20%, rgba(151, 145, 255, .38), transparent 40%),
+    linear-gradient(120deg, #25254d, #4942a7 58%, #7169e8);
+}
+
+.auth-page .circle {
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow: inset 8px 8px 16px rgba(0, 0, 0, 0.18), inset -8px -8px 16px rgba(255, 255, 255, 0.12);
+}
+.auth-page .circle-top    { top: -150px; right: -70px; }
+.auth-page .circle-bottom { bottom: -170px; left: -80px; }
+
+.auth-page .overlay-content {
+  position: relative;
+  height: 100%;
+  padding: 0 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.auth-page .overlay-content .title { font-size: 1.7rem; color: #fff; }
+.auth-page .desc {
+  margin: 16px 0 18px;
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: #e5e4ff;
+}
+
+/* ---------- Mobile: stack the panels, no slide ---------- */
+@media (max-width: 760px) {
+  .auth-page .container { height: auto; display: flex; flex-direction: column; }
+  .auth-page .container .form-box,
+  .auth-page .container .overlay {
+    position: relative;
+    top: auto;
+    bottom: auto;
+    left: auto;
+    width: 100%;
+  }
+  .auth-page .container .form-box { order: 1; padding: 36px 0; }
+  .auth-page .container .overlay  { order: 2; min-height: 260px; }
+  .auth-page .form-box form { height: auto; overflow: visible; }
+  .auth-page .overlay-content { padding: 40px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auth-page *,
+  .auth-page *::before,
+  .auth-page *::after { transition: none !important; }
+}
+
+
+/* =========================================================
+   PART 3: STUDENT DASHBOARD  (scoped to body.dash-page)
+   ========================================================= */
+
+.dash-page {
+  background: #f4f6fb;
+}
+
+/* SIDEBAR */
+.dash-page .sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 250px;
+  padding: 24px 16px;
+  background: linear-gradient(180deg, #0f2a6b, #0a1a45);
+  color: #fff;
+  z-index: 1040;
+  transition: transform .3s;
+}
+
+.dash-page .sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 30px;
+  padding: 0 10px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #fff;
+  text-decoration: none;
+}
+
+.dash-page .sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.dash-page .sidebar-nav a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  color: #d5dcf2;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background .2s;
+}
+
+.dash-page .sidebar-nav a:hover,
+.dash-page .sidebar-nav a.active {
+  background: rgba(255, 255, 255, .12);
+  color: #fff;
+}
+
+.dash-page .sidebar-nav .logout-link {
+  margin-top: 28px;
+}
+
+/* MAIN AREA */
+.dash-page .dash-main {
+  margin-left: 250px;
+  min-height: 100vh;
+}
+
+.dash-page .dash-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 28px;
+  background: #fff;
+  border-bottom: 1px solid #e6e8f2;
+}
+
+.dash-page .topbar-title {
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.dash-page .user-menu {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.dash-page .user-menu i {
+  font-size: 1.9rem;
+  color: var(--brand);
+}
+
+.dash-page .dash-content {
+  padding: 32px 28px;
+}
+
+/* STAT CARDS */
+.dash-page .dash-stat {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #e9eaf3;
+  border-radius: 14px;
+  box-shadow: 0 6px 20px #29295c08;
+}
+
+.dash-page .dash-stat p {
+  margin: 0 0 4px;
+  font-size: .9rem;
+  color: var(--muted);
+}
+
+.dash-page .dash-stat h3 {
+  margin: 0;
+  font-weight: 800;
+}
+
+.dash-page .dash-stat i {
+  font-size: 2.2rem;
+  color: #9aa3c4;
+}
+
+/* CARDS */
+.dash-page .dash-card {
+  background: #fff;
+  border: 1px solid #e9eaf3;
+  border-radius: 14px;
+  box-shadow: 0 6px 20px #29295c08;
+  overflow: hidden;
+}
+
+.dash-page .dash-card-header {
+  padding: 16px 20px;
+  font-weight: 600;
+  border-bottom: 1px solid #e9eaf3;
+}
+
+.dash-page .dash-card-body {
+  padding: 20px;
+}
+
+.dash-page .table th {
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.dash-page .table td {
+  color: #4a4e63;
+  white-space: nowrap;
+}
+
+/* MOBILE */
+@media (max-width: 991px) {
+  .dash-page .sidebar {
+    transform: translateX(-100%);
+  }
+  .dash-page .sidebar.open {
+    transform: translateX(0);
+  }
+  .dash-page .dash-main {
+    margin-left: 0;
+  }
+  .dash-page .dash-content {
+    padding: 24px 16px;
+  }
+}
+
+/* ---------- PART 3b: dashboard content sections ---------- */
+
+.dash-page .dash-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+}
+
+.dash-page .dash-section {
+  margin-bottom: 56px;
+}
+
+.dash-page .dash-section:last-child {
+  margin-bottom: 0;
+}
+
+.dash-page .dash-card .module-row:last-child {
+  border-bottom: none;
+}
+
+.dash-page .practice-card,
+.dash-page .lesson-viewer {
+  box-shadow: 0 6px 20px #29295c08;
 }
