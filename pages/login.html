@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CodeMate AI | Login</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body class="auth-page">
+  <main class="container page-signin">
+
+    <section class="form-box" aria-label="Login">
+      <form id="signInForm" novalidate>
+        <h1 class="title">Login</h1>
+        <p class="subtitle">Enter your account details below.</p>
+
+        <div class="field">
+          <label class="label" for="email">Email address</label>
+          <input class="input" type="email" id="email" name="email" placeholder="name@example.com" autocomplete="email" required />
+        </div>
+
+        <div class="field">
+          <label class="label" for="password">Password</label>
+          <input class="input" type="password" id="password" name="password" placeholder="Password" autocomplete="current-password" required />
+        </div>
+
+        <div class="form-row">
+          <label class="check"><input type="checkbox" id="remember" name="remember" /><span>Remember me</span></label>
+          <a href="#" class="forgot">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="btn btn-dark btn-block">Login</button>
+      </form>
+    </section>
+
+    <aside class="overlay">
+      <span class="circle circle-top"></span>
+      <span class="circle circle-bottom"></span>
+      <div class="overlay-content">
+        <h2 class="title">Hello Friend !</h2>
+        <p class="desc">No account yet? Enter your personal details and start your journey with us</p>
+        <a href="signup.html" class="btn btn-light">Sign up</a>
+      </div>
+    </aside>
+
+  </main>
+
+  <script src="../assets/js/script.js"></script>
+</body>
+</html>
